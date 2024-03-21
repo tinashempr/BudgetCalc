@@ -1,0 +1,95 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+import os
+import json
+
+
+# In[2]:
+
+
+class BudgetCalculator:
+    def __init__(self):
+        self.expenses=[]
+        self.budget_limits={}
+        self.load_data()
+
+
+# In[4]:
+
+
+def load_data(self):
+    if os.path.exists('expenses.json'):
+        with open('expenses.json', 'r') as file:
+            self.expenses = json.load(file)
+    if os.path.exists('budget_limits.json'):
+        with open('budget_limits.json', 'r') as file:
+            self.budget_limits = json.load(file)
+
+        
+
+
+# In[5]:
+
+
+def save_data(self):
+    with open('expenses.json','w') as file:
+        json.dump(self.expenses, file)
+        with open('budget_limits.json','w') as file:
+            json.dump(self.budget_limits,file)
+        
+
+
+# In[6]:
+
+
+def add_expense(self,category,amount):
+    expense={'category':category,'amount':amount}
+    self.expenses.append(expense)
+    self.save_data()
+
+
+# In[7]:
+
+
+def categorize_expenses(self):
+    categories={}
+    for expense in self.expenses:
+        if expense['category'] not in categories:
+            categories[expense['category']] += expense['amount']
+            return categories
+
+
+# In[9]:
+
+
+def set_budget_limit(self,category,limit):
+    self.budget_Limits[category] = limitself.save_data()
+
+
+# In[12]:
+
+
+def check_budget_limits(self):
+    categories = self.categorize_expenses()
+    for category, limit in self.budget_limits.items():
+        if category in categories and categories[category] > limit:
+            print(f"Warning: Spending in '{category}' category exceeds budget limit.")
+
+
+# In[14]:
+
+
+def generate_report(self):
+    categories = self.categorize_expenses()
+    total_expenses = sum(exp['amount'] for exp in self.expenses)
+
+
+# In[ ]:
+
+
+
+
